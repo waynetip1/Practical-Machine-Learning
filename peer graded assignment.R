@@ -42,8 +42,8 @@ library(randomForest)
 modelfit.rf <- randomForest(classe ~.,training)
 
 # modelfit.rf <- train(classe~.,data=training,method='rf',
-                     trControl=trainControl(method = 'cv',number=5),
-                     prox=TRUE,allowParallel=TRUE)
+                     #rControl=trainControl(method = 'cv',number=5),
+                     #prox=TRUE,allowParallel=TRUE)
 
 # predict
 pred.rf <- predict(modelfit.rf,testing)
@@ -53,3 +53,10 @@ cmatrix
 
 # plot model fit
 plot(modelfit.rf)
+
+# Final prediction
+final.pred <- predict(modelfit.rf, test, type = "class")
+print(final.pred)
+
+# add final predict to test set
+test <- cbind(test,final.pred)
